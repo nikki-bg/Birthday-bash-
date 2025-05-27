@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dominique's Galaxy Invite</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'VT323', monospace;
+      background: radial-gradient(circle at center, #1d0033, #000000);
+      background-size: cover;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .screen {
+      display: none;
+      background-color: rgba(0, 0, 0, 0.85);
+      border: 1px solid #ffccff;
+      border-radius: 15px;
+      padding: 25px;
+      margin-top: 40px;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .active {
+      display: block;
+    }
+
+    .avatar-container {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      margin: 30px auto 20px;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .avatar {
+      background-image: url('https://i.imgur.com/Lf9QvXt.png');
+      background-size: cover;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 3px solid #fff;
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background-color: #fff;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: sparkle 2s infinite;
+    }
+
+    .sparkle:nth-child(2) { top: -10px; left: 50%; animation-delay: 0.2s; }
+    .sparkle:nth-child(3) { bottom: -10px; left: 40%; animation-delay: 0.4s; }
+    .sparkle:nth-child(4) { top: 20%; right: -10px; animation-delay: 0.6s; }
+    .sparkle:nth-child(5) { bottom: 30%; left: -10px; animation-delay: 0.8s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes sparkle {
+      0%, 100% { opacity: 0.8; transform: scale(1); }
+      50% { opacity: 0.2; transform: scale(1.5); }
+    }
+
+    .calendar {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid #ffccff;
+      border-radius: 12px;
+      padding: 20px;
+      font-size: 1.1rem;
+    }
+
+    .highlight {
+      color: #ffccff;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    button {
+      background-color: #ffccff;
+      color: #000;
+      border: none;
+      padding: 12px 24px;
+      font-family: 'VT323', monospace;
+      font-size: 1.3rem;
+      margin: 10px;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+
+    button:hover {
+      background-color: #e6b3e6;
+    }
+
+    #explosion {
+      display: none;
+      font-size: 2rem;
+      color: red;
+      margin-top: 40px;
+      animation: shake 0.5s infinite;
+    }
+
+    @keyframes shake {
+      0% { transform: translate(1px, 1px); }
+      25% { transform: translate(-1px, -2px); }
+      50% { transform: translate(-3px, 0px); }
+      75% { transform: translate(2px, 2px); }
+      100% { transform: translate(1px, -1px); }
+    }
+
+  </style>
+</head>
+<body onload="startMusic()">
+
+  <!-- Page 1: Boot Screen -->
+  <div class="screen active" id="boot-screen">
+    <p>SYSTEM BOOT: DOMINIQUE_BDAY.EXE</p>
+    <p>> decoding starlight.exe</p>
+    <p>> activating noises_by_pinkpantheress.mp3 [00:35]</p>
+    <p>> connecting to glitterverse...</p>
+    <button onclick="goToPage('profile')">ENTER</button>
+  </div>
+
+  <!-- Page 2: Avatar -->
+  <div class="screen" id="profile">
+    <div class="avatar-container">
+      <div class="avatar"></div>
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+    </div>
+    <h2>Dominique // Glitter Fairy Baddie</h2>
+    <p>Birthday Bash: July 2–3 | 11AM</p>
+    <p>Galaxy Portal: [TOP SECRET LOCATION]</p>
+    <p>Vibe: Ethereal. Floating. Iconic.</p>
+    <button onclick="goToPage('rsvp')">NEXT</button>
+  </div>
+
+  <!-- Page 3: RSVP -->
+  <div class="screen" id="rsvp">
+    <h1>RSVP to Dominique’s Birthday Bash</h1>
+    <div class="calendar">
+      <p><span class="highlight">JULY 2ND</span> — Glitter Portal Activation</p>
+      <p><span class="highlight">JULY 3RD</span> — All-Out Celestial Chaos</p>
+      <p>TIME: 11:00 AM each day</p>
+    </div>
+    <button onclick="explode()">NO — I’m Dust in the Wind</button>
+    <button onclick="goToPage('rsvp-confirm')">YES — I’m Galactic Ready</button>
+  </div>
+
+  <!-- Page 3 Confirm -->
+  <div class="screen" id="rsvp-confirm">
+    <p>Calibrating tiara alignment...</p>
+    <p>Downloading glitter boots...</p>
+    <p>Summoning RSVP stars...</p>
+    <p><strong>You’re officially cosmic.</strong></p>
+  </div>
+
+  <!-- Fake Explosion -->
+  <div id="explosion">BOOM. You missed the party. Tragic.</div>
+
+  <audio id="bg-music" autoplay loop>
+    <source src="https://files.catbox.moe/m0qvph.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    function startMusic() {
+      const music = document.getElementById('bg-music');
+      music.currentTime = 35;
+      music.play().catch(() => {
+        document.addEventListener('click', () => music.play(), { once: true });
+      });
+    }
+
+    function goToPage(id) {
+      document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function explode() {
+      document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('active'));
+      document.getElementById('explosion').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
